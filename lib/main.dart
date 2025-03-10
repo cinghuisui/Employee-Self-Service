@@ -1,13 +1,8 @@
-// import 'package:ess_mobile/buttomnavbar/buttom_nav_bar.dart';
-// import 'package:ess_mobile/buttomnavbar/buttom_nav_bar.dart';
 import 'package:ess_mobile/kebijakanAPK/kebijakan_apk.dart';
-import 'package:ess_mobile/login/login_page.dart';
-// import 'package:ess_mobile/pages/kay/tanggal.dart';
-// import 'package:ess_mobile/pages/kay/kay_page.dart';
+import 'package:ess_mobile/login/login_page_new.dart';
 import 'package:ess_mobile/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'package:intl/date_symbol_data_file.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
@@ -50,11 +45,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        textSelectionTheme: TextSelectionThemeData(
+          cursorColor: Colors.blue,
+          selectionColor: Colors.blue.withOpacity(0.4),
+          selectionHandleColor: Colors.blue,
+        ),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           selectedItemColor: darkblueColor,
         ),
       ),
-      home: hasAcceptedPolicy ? LoginPage() : PolicyAgreementScreen(),
+      home: hasAcceptedPolicy ? LoginPage1() : PolicyAgreementScreen(),
       // home: PolicyAgreementScreen(),
       // home: hasAcceptedPolicy ? LoginScreen() : PolicyAgreementScreen(),
       // home: ButtomNavBar(),

@@ -1,9 +1,6 @@
-// import 'package:ess_mobile/pages/home/home_page.dart';
 import 'package:ess_mobile/pages/home/home_page_new.dart';
-// import 'package:ess_mobile/pages/kay/kay_page.dart';
 import 'package:ess_mobile/pages/kay/uji_coba.dart';
 import 'package:ess_mobile/pages/notification/notification_page.dart';
-// import 'package:ess_mobile/pages/profile/profile_page.dart';
 import 'package:ess_mobile/pages/profile/profile_page_new.dart';
 import 'package:ess_mobile/themes.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +17,7 @@ class _ButtomNavBarState extends State<ButtomNavBar> {
   int _selectedIndex = 0;
 
   final _screens = [
+    // mydevlopment(),
     HomePageNew(),
     Notifi(),
     // NotificationPage(),

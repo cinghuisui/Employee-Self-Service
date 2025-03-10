@@ -9,7 +9,10 @@ import 'package:ess_mobile/styles/text_style.dart';
 // import 'package:ess_mobile/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
+// import 'package:lottie/lottie.dart' as lottie;
 
 class HomePageNew extends StatefulWidget {
   const HomePageNew({super.key});
@@ -29,6 +32,66 @@ class _HomePageNewState extends State<HomePageNew> {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       _updateTime();
     });
+  }
+
+  void _showUnderDevelopment(BuildContext context) {
+    showModalBottomSheet(
+      backgroundColor: Colors.white,
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Lottie.asset(
+                'assets/lottie/Animation - 1740973278054.json',
+                width: 200,
+                height: 200,
+                repeat: true,
+              ),
+              // Icon(Icons.info_outline, size: 50, color: Colors.orange),
+              // SizedBox(height: 10),
+              Text(
+                "Layanana Belum Tersedia",
+                style: GoogleFonts.poppins(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              // Text(
+              //   "Layanan Belum Tersedia",
+              //   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,),
+              // ),
+              SizedBox(height: 10),
+              Text(
+                "Fitur ini masih dalam tahap pengembangan. Nantikan update berikutnya!",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.lato(
+                  fontSize: 14,color: Colors.grey,
+                ),
+              ),
+              // Text(
+              //   "Fitur ini masih dalam tahap pengembangan. Nantikan update berikutnya!",
+              //   textAlign: TextAlign.center,
+              //   style: TextStyle(fontSize: 14, color: Colors.grey),
+              // ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    shadowColor: Colors.orangeAccent,
+                    backgroundColor: Colors.blue[800]),
+                onPressed: () => Navigator.pop(context),
+                child: Text("Tutup", style: GoogleFonts.roboto(fontSize: 16, fontWeight: FontWeight.w600,color: Colors.white,),),
+              )
+            ],
+          ),
+        );
+      },
+    );
   }
 
   void _updateTime() {
@@ -53,7 +116,6 @@ class _HomePageNewState extends State<HomePageNew> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      
       // physics: BouncingScrollPhysics(),
       child: Column(
         children: [
@@ -82,13 +144,20 @@ class _HomePageNewState extends State<HomePageNew> {
               child: Column(
                 children: [
                   Text(
-                    'ESS MOBILE',
-                    style: kHeading6.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                    "ESS MOBILE",
+                    style: GoogleFonts.roboto(
                       fontSize: 45,
+                      fontWeight: FontWeight.bold,color: Colors.white,
                     ),
                   ),
+                  // Text(
+                  //   'ESS MOBILE',
+                  //   style: kHeading6.copyWith(
+                  //     color: Colors.white,
+                  //     fontWeight: FontWeight.bold,
+                  //     fontSize: 45,
+                  //   ),
+                  // ),
                   // SizedBox(
                   //   height: 30,
                   // ),
@@ -159,7 +228,7 @@ class _HomePageNewState extends State<HomePageNew> {
                               child: Category(
                                 color: Color(0xffFEBD2B),
                                 icon: Icon(
-                                 (FontAwesomeIcons.filePen),
+                                  (FontAwesomeIcons.filePen),
                                   size: 35,
                                   color: Colors.white,
                                 ),
@@ -167,25 +236,30 @@ class _HomePageNewState extends State<HomePageNew> {
                               ),
                             ),
                             InkWell(
-                              onTap: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //       builder: (context) => CutiRiwayatPage()),
-                                // );
-                              },
-                           child:  Category(
-                              color: Color(0Xff67DD7F),
-                              icon: Icon(
-                                Icons.receipt,
-                                size: 35,
-                                color: Colors.white,
+                              onTap: () => _showUnderDevelopment(context),
+                              // onTap: () {
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) {
+                              //         _showUnavailableService(context);
+                              //         return Container(); // Return an empty container or any other widget
+                              //       }),
+                              // );
+                              // },
+                              child: Category(
+                                color: Color(0Xff67DD7F),
+                                icon: Icon(
+                                  Icons.receipt,
+                                  size: 35,
+                                  color: Colors.white,
+                                ),
+                                caption: "Slip Gaji",
+                                // caption: "Riwayat\nPengajuan Cuti",
                               ),
-                              caption: "Slip Gaji",
-                              // caption: "Riwayat\nPengajuan Cuti",
-                            ),
                             ),
                             InkWell(
+                              onTap: () => _showUnderDevelopment(context),
                               // onTap: () {
                               //   Navigator.push(
                               //     context,
@@ -193,68 +267,86 @@ class _HomePageNewState extends State<HomePageNew> {
                               //         builder: (context) => Absensi()),
                               //   );
                               // },
-                            child:  Category(
-                              color: Color(0xff56A5FF),
-                              icon: Icon(
-                                Icons.edit_calendar,
-                                size: 35,
-                                color: Colors.white,
-                              ),
-                              caption: "Absensi",
-                            ),
-                            ),
-                            Category(
-                              color: Color(0xffF86867),
-                              icon: Icon(
-                                Icons.warning,
-                                size: 35,
-                                color: Colors.white,
-                              ),
-                              caption: "Warning",
-                            ),
-                            Category(
-                                color: Color(0xffBC73FF),
+                              child: Category(
+                                color: Color(0xff56A5FF),
                                 icon: Icon(
-                                  Icons.shopping_cart,
+                                  Icons.edit_calendar,
                                   size: 35,
                                   color: Colors.white,
                                 ),
-                                caption: "Transaki \n Belanja Bulanan"),
-                            Category(
-                              color: Color(0xFF2193B0),
-                              icon: Icon(
-                                Icons.update,
-                                size: 35,
-                                color: Colors.white,
+                                caption: "Absensi",
                               ),
-                              caption: "Update Data",
                             ),
-                            Category(
-                              color: Color(0xFF56AB2F),
-                              icon: Icon(
-                                Icons.lock,
-                                size: 35,
-                                color: Colors.white,
+                            InkWell(
+                              onTap: () => _showUnderDevelopment(context),
+                              child: Category(
+                                color: Color(0xffF86867),
+                                icon: Icon(
+                                  Icons.warning,
+                                  size: 35,
+                                  color: Colors.white,
+                                ),
+                                caption: "Warning",
                               ),
-                              caption: "OTP \n Transaksi",
                             ),
-                            Category(
-                              color: Color(0xFF1E3C72),
-                              icon: Icon(
-                                Icons.leaderboard,
-                                size: 35,
-                                color: Colors.white,
-                              ),
-                              caption: "Update",
+                            InkWell(
+                              onTap: () => _showUnderDevelopment(context),
+                              child: Category(
+                                  color: Color(0xffBC73FF),
+                                  icon: Icon(
+                                    Icons.shopping_cart,
+                                    size: 35,
+                                    color: Colors.white,
+                                  ),
+                                  caption: "Transaki \n Belanja Bulanan"),
                             ),
-                            Category(
-                              color: Color(0xFFFF9A9E),
-                              icon: Icon(
-                                Icons.settings,
-                                size: 35,
-                                color: Colors.white,
+                            InkWell(
+                              onTap: () => _showUnderDevelopment(context),
+                              child: Category(
+                                color: Color(0xFF2193B0),
+                                icon: Icon(
+                                  Icons.update,
+                                  size: 35,
+                                  color: Colors.white,
+                                ),
+                                caption: "Update Data",
                               ),
-                              caption: "Setting",
+                            ),
+                            InkWell(
+                              onTap: () => _showUnderDevelopment(context),
+                              child: Category(
+                                color: Color(0xFF56AB2F),
+                                icon: Icon(
+                                  Icons.lock,
+                                  size: 35,
+                                  color: Colors.white,
+                                ),
+                                caption: "OTP \n Transaksi",
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () => _showUnderDevelopment(context),
+                              child: Category(
+                                color: Color(0xFF1E3C72),
+                                icon: Icon(
+                                  Icons.leaderboard,
+                                  size: 35,
+                                  color: Colors.white,
+                                ),
+                                caption: "Update",
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () => _showUnderDevelopment(context),
+                              child: Category(
+                                color: Color(0xFFFF9A9E),
+                                icon: Icon(
+                                  Icons.settings,
+                                  size: 35,
+                                  color: Colors.white,
+                                ),
+                                caption: "Setting",
+                              ),
                             ),
                           ],
                         ),
@@ -296,7 +388,7 @@ class _HomePageNewState extends State<HomePageNew> {
           // SizedBox(
           //   height: 20,
           // ),
-          
+
           // SizedBox(
           //         width: MediaQuery.of(context).size.width,
           //         child: Padding(
