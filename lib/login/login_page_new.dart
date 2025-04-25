@@ -37,18 +37,21 @@ class _LoginPage1State extends State<LoginPage1> {
   bool _isPasswordVisible = false;
   bool _isUsernameFocused = false;
   bool _isPasswordFocused = false;
-    // bool _showUsernameError = false;
+  // bool isLoading = false;
+  // bool _showUsernameError = false;
 
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  Future<void> _login() async {     
+  Future<void> _login() async {
+    // isLoading = true;
     final prefs = await SharedPreferences.getInstance();
     bool isFirstLogin = prefs.getBool('first_login') ?? true;
     // _showUsernameError = _usernameController.text.isEmpty;
     // Simulasi login (username: admin, password: 1234)
-    if (_usernameController.text == "admin" &&
-        _passwordController.text == "1234") {          
+    if (_usernameController.text == "23455" &&
+        _passwordController.text == "1234") {
+      // isLoading = false;
       if (isFirstLogin) {
         Navigator.pushReplacement(
           context,
@@ -98,9 +101,10 @@ class _LoginPage1State extends State<LoginPage1> {
                 ),
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Text("Login ID",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  child: Text(
+                    "Login ID",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
                 ),
 
                 const SizedBox(height: 8),
@@ -182,6 +186,7 @@ class _LoginPage1State extends State<LoginPage1> {
                         ),
                         onPressed: () {
                           setState(() {
+                            // isLoading = true;
                             _isPasswordVisible = !_isPasswordVisible;
                           });
                         },
@@ -190,47 +195,50 @@ class _LoginPage1State extends State<LoginPage1> {
                   ),
                 ),
                 // SizedBox(height: 15,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    // const Text("Lupa Password?"),
-                    TextButton(
-                        onPressed: () {
-                          // Navigate to sign up
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const ChangePasswordScreen()));
-                        },
-                        child: Text(
-                          'Lupa Password?',
-                          style: TextStyle(
-                            color: Colors.blue[800],
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.end,
+                //   children: [
+                //     // const Text("Lupa Password?"),
+                //     TextButton(
+                //       onPressed: () {
+                //         // Navigate to sign up
+                //         Navigator.push(
+                //             context,
+                //             MaterialPageRoute(
+                //                 builder: (context) =>
+                //                     const ChangePasswordScreen()));
+                //       },
+                //       child: Text(
+                //         'Lupa Password?',
+                //         style: TextStyle(
+                //           color: Colors.blue[800],
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                SizedBox(height: 50),
+                // isLoading
+                //     ? CircularProgressIndicator()
+                    SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: _login,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue[800],
+                            padding: EdgeInsets.symmetric(vertical: 15),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0)),
                           ),
-                        ))
-                  ],
-                ),
-                SizedBox(height: 10),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: _login,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue[800],
-                      padding: EdgeInsets.symmetric(vertical: 15),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0)),
-                    ),
-                    child: Text(
-                      'Login',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
+                          child: Text(
+                            'Login',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
                 // const SizedBox(height: 20),
                 // ElevatedButton(
                 //   onPressed: _login,
@@ -255,6 +263,7 @@ class ChangePasswordScreen extends StatefulWidget {
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   bool _isPasswordFocused = false;
   bool _isPasswordVisible = false;
+  bool isLoading = false;
   // bool _isUsernameFocused = false;
   // final TextEditingController _newPasswordController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -369,19 +378,22 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             SizedBox(
               height: 20,
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue[800] // Warna biru untuk tombol
+            isLoading
+                ? CircularProgressIndicator()
+                : ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            Colors.blue[800] // Warna biru untuk tombol
+                        ),
+                    onPressed: _changePassword,
+                    child: const Text(
+                      "Simpan Password",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
-              onPressed: _changePassword,
-              child: const Text(
-                "Simpan Password",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ),
           ],
         ),
       ),

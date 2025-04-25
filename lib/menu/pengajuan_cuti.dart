@@ -15,9 +15,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: ThemeData(
+        textSelectionTheme: const TextSelectionThemeData(
+          selectionColor:
+              Colors.lightBlueAccent, // Warna biru saat teks diseleksi
+          cursorColor: Colors.blue, // Warna kursor
+          selectionHandleColor: Colors.blue, // Warna titik seleksi
+        ),
+      ),
       debugShowCheckedModeBanner: false,
-      home: PengajuanCuti(),
+      home: const PengajuanCuti(),
     );
   }
 }
@@ -316,6 +324,7 @@ class _PengajuanCutiState extends State<PengajuanCuti> {
       //     },
       //   ),
       // ),
+
       body: Container(
         // padding: const EdgeInsets.symmetric(horizontal: 20),
         decoration: const BoxDecoration(
@@ -333,6 +342,47 @@ class _PengajuanCutiState extends State<PengajuanCuti> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Informasi Cuti
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 0),
+                  child: Text(
+                    "Informasi Cuti",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    // style: TextStyle(
+                    //   fontWeight: FontWeight.bold,
+                    //   fontSize: 16,
+                    // ),
+                  ),
+                ),
+                // const SizedBox(height: 16),
+                const SizedBox(height: 8),
+                // Card Informasi
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    // crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      InfoCard(
+                        title: "SISA CUTI",
+                        content: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "12",
+                              style: TextStyle(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
                 const Text(
                   "Nama Lengkap",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -340,11 +390,22 @@ class _PengajuanCutiState extends State<PengajuanCuti> {
                 const SizedBox(height: 8),
                 TextFormField(
                   controller: _namaLengkapController,
+                  cursorColor: Colors.blue[800],
                   decoration: InputDecoration(
                     hintText: "Nama Lengkap",
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.0)),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
                     errorText: _errorNamaLengkap,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.blue[800]!, width: 2.0),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black54, width: 1.5),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -370,6 +431,15 @@ class _PengajuanCutiState extends State<PengajuanCuti> {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     errorText: _errorNik,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.blue[800]!, width: 2.0),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black54, width: 1.5),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -389,29 +459,61 @@ class _PengajuanCutiState extends State<PengajuanCuti> {
                 ),
                 const SizedBox(height: 8),
                 DropdownButtonFormField<String>(
-                  hint: const Text("-Pilih Departement-"),
-                  value: selectedDepartement,
-                  items: departement.map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                  onChanged: (newValue) {
-                    setState(() {});
-                  },
                   decoration: InputDecoration(
+                    // labelText: 'Departemen/Bagian',
+                    hintText: '-Pilih Departemen-',
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black54,width: 1.5),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue[800]!, width: 2),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: BorderSide(color: Colors.red),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Departement harus diisi';
-                    }
-                    return null;
+                  items: [
+                    DropdownMenuItem(
+                      value: 'it',
+                      child: Text('IT'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'hr',
+                      child: Text('HR'),
+                    ),
+                    // Tambahkan item lainnya sesuai kebutuhan
+                  ],
+                  onChanged: (value) {
+                    // Handle perubahan
                   },
                 ),
+                // DropdownButtonFormField<String>(
+                //   hint: const Text("-Pilih Departement-"),
+                //   value: selectedDepartement,
+                //   items: departement.map((String value) {
+                //     return DropdownMenuItem<String>(
+                //       value: value,
+                //       child: Text(value),
+                //     );
+                //   }).toList(),
+                //   onChanged: (newValue) {
+                //     setState(() {});
+                //   },
+                //   decoration: InputDecoration(
+                //     border: OutlineInputBorder(
+                //       borderRadius: BorderRadius.circular(8.0),
+                //     ),
+                //   ),
+                //   validator: (value) {
+                //     if (value == null || value.isEmpty) {
+                //       return 'Departement harus diisi';
+                //     }
+                //     return null;
+                //   },
+                // ),
 
                 const SizedBox(height: 16),
                 const Text(
@@ -434,9 +536,21 @@ class _PengajuanCutiState extends State<PengajuanCuti> {
                     });
                   },
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black54,width: 1.5),
                       borderRadius: BorderRadius.circular(8.0),
                     ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue[800]!, width: 2),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    // border: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.circular(8.0),
+                    // ),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -452,9 +566,21 @@ class _PengajuanCutiState extends State<PengajuanCuti> {
                         TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 8),
                 DropdownButtonFormField<String>(
-                  decoration: const InputDecoration(
+                  decoration:  InputDecoration(
                     hintText: '-Pilih Hari-',
-                    border: OutlineInputBorder(),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black54,width: 1.5),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue[800]!, width: 2),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    // border: OutlineInputBorder(
+                    //   borderSide: BorderSide(color: Colors.red),
+                    //   borderRadius: BorderRadius.circular(10),
+                    // ),
+                    // border: OutlineInputBorder(),
                   ),
                   value: _selectedHariLibur,
                   onChanged: (String? newValue) {
@@ -499,9 +625,21 @@ class _PengajuanCutiState extends State<PengajuanCuti> {
                     });
                   },
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black54,width: 1.5),
                       borderRadius: BorderRadius.circular(8.0),
                     ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue[800]!, width: 2),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    // border: OutlineInputBorder(
+                    //   borderSide: BorderSide(color: Colors.red),
+                    //   borderRadius: BorderRadius.circular(8.0),
+                    // ),
+                    // border: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.circular(8.0),
+                    // ),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -654,6 +792,15 @@ class _PengajuanCutiState extends State<PengajuanCuti> {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     errorText: _errorKeteranganCuti,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.blue[800]!, width: 2.0),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black54, width: 1.5),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -944,6 +1091,48 @@ class FullScreenImage extends StatelessWidget {
         child: Center(
           child: Image.file(image),
         ),
+      ),
+    );
+  }
+}
+
+class InfoCard extends StatelessWidget {
+  final String title;
+  final Widget content;
+
+  const InfoCard({required this.title, required this.content});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 327,
+      height: 80,
+      margin: EdgeInsets.only(bottom: 12),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black),
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(vertical: 6),
+            decoration: BoxDecoration(
+              color: Colors.blue[500],
+              borderRadius: BorderRadius.vertical(top: Radius.circular(6)),
+            ),
+            child: Text(
+              title,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          Expanded(
+            child: Center(child: content),
+          ),
+        ],
       ),
     );
   }

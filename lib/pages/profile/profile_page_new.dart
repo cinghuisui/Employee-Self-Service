@@ -156,7 +156,7 @@ void _showFullImage() {
           ),
           SizedBox(height: 10),
           Text(
-            "Andi Wibawa",
+            "Susanto",
             style: kSubtitle2.copyWith(
               color: Colors.black,
               fontWeight: FontWeight.bold,
@@ -177,38 +177,38 @@ void _showFullImage() {
           Expanded(
             child: ListView(
               children: [
-                ListTile(
-                  leading: Icon(Icons.notifications, color: Colors.blue),
-                  title: Text("Notification Settings",style: kSubtitle2.copyWith(
-                      color: Colors.black,
-                      // fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),),
-                  trailing: Text("On", style: kSubtitle2.copyWith(
-                      color: Colors.black54,
-                      // fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),),
-                ),
-                ListTile(
-                  leading: Icon(Icons.calendar_today, color: Colors.blue),
-                  title: Text(
-                    "Calender Settings",
-                    style: kSubtitle2.copyWith(
-                      color: Colors.black,
-                      // fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),
-                  ),
-                  trailing: Text("On", style: kSubtitle2.copyWith(
-                      color: Colors.black54,
-                      // fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),),
-                ),
+                // ListTile(
+                //   leading: Icon(Icons.notifications, color: Colors.blue),
+                //   title: Text("Notification Settings",style: kSubtitle2.copyWith(
+                //       color: Colors.black,
+                //       // fontWeight: FontWeight.bold,
+                //       fontSize: 15,
+                //     ),),
+                //   trailing: Text("On", style: kSubtitle2.copyWith(
+                //       color: Colors.black54,
+                //       // fontWeight: FontWeight.bold,
+                //       fontSize: 15,
+                //     ),),
+                // ),
+                // ListTile(
+                //   leading: Icon(Icons.calendar_today, color: Colors.blue),
+                //   title: Text(
+                //     "Calender Settings",
+                //     style: kSubtitle2.copyWith(
+                //       color: Colors.black,
+                //       // fontWeight: FontWeight.bold,
+                //       fontSize: 15,
+                //     ),
+                //   ),
+                //   trailing: Text("On", style: kSubtitle2.copyWith(
+                //       color: Colors.black54,
+                //       // fontWeight: FontWeight.bold,
+                //       fontSize: 15,
+                //     ),),
+                // ),
                 ListTile(
                   leading: Icon(Icons.person, color: Colors.blue),
-                  title: Text("Account Settings",style: kSubtitle2.copyWith(
+                  title: Text("Personal Info",style: kSubtitle2.copyWith(
                       color: Colors.black,
                       // fontWeight: FontWeight.bold,
                       fontSize: 15,
@@ -221,22 +221,22 @@ void _showFullImage() {
                     );
                   },
                 ),
-                ListTile(
-                  leading: Icon(Icons.key, color: Colors.blue),
-                  title: Text("Change Password",style: kSubtitle2.copyWith(
-                      color: Colors.black,
-                      // fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ChangePassword()),
-                    );
-                  },
-                  // trailing: Text("English",
-                  //     style: TextStyle(color: Colors.black54)),
-                ),
+                // ListTile(
+                //   leading: Icon(Icons.key, color: Colors.blue),
+                //   title: Text("Change Password",style: kSubtitle2.copyWith(
+                //       color: Colors.black,
+                //       // fontWeight: FontWeight.bold,
+                //       fontSize: 15,
+                //     ),),
+                //   onTap: () {
+                //     Navigator.push(
+                //       context,
+                //       MaterialPageRoute(builder: (context) => ChangePassword()),
+                //     );
+                //   },
+                //   // trailing: Text("English",
+                //   //     style: TextStyle(color: Colors.black54)),
+                // ),
                 ListTile(
                   leading: Icon(Icons.logout, color: Colors.red),
                   title: Text("LogOut",style: kSubtitle2.copyWith(

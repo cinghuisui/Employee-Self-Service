@@ -1,4 +1,5 @@
 import 'package:ess_mobile/menu/pengajuan_cuti.dart';
+// import 'package:ess_mobile/menu/riwayat_pengajuan_cuit_new.dart';
 import 'package:ess_mobile/menu/riwayat_pengajuan_cuti.dart';
 // import 'package:ess_mobile/menu/surat_cuti.dart';
 import 'package:flutter/material.dart';
@@ -56,6 +57,7 @@ class _AbsensiPageState extends State<AbsensiPage> {
           // Isi berdasarkan tab yang dipilih
           Expanded(
             child: _selectedIndex == 0 ? PengajuanCuti() : CutiRiwayatPage(),
+            //  child: _selectedIndex == 0 ? PengajuanCuti() : DataList(),
             // child: _selectedIndex == 0 ? _buildAllContent() : _buildUnansweredContent(),
           ),
         ],

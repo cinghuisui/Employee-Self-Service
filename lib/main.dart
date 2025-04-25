@@ -47,7 +47,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         textSelectionTheme: TextSelectionThemeData(
           cursorColor: Colors.blue,
-          selectionColor: Colors.blue.withOpacity(0.4),
+          selectionColor: Colors.lightBlueAccent, // Warna biru saat teks diseleksi
+          // selectionColor: Colors.blue.withOpacity(0.4),
           selectionHandleColor: Colors.blue,
         ),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(

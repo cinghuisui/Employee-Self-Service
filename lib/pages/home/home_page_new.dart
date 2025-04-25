@@ -47,19 +47,23 @@ class _HomePageNewState extends State<HomePageNew> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Lottie.asset(
-                'assets/lottie/Animation - 1740973278054.json',
-                width: 200,
-                height: 200,
-                repeat: true,
+              SingleChildScrollView (
+                child: Lottie.asset(
+                  'assets/lottie/Animation - 1740973278054.json',
+                  width: 200,
+                  height: 200,
+                  repeat: true,
+                ),
               ),
               // Icon(Icons.info_outline, size: 50, color: Colors.orange),
               // SizedBox(height: 10),
-              Text(
-                "Layanana Belum Tersedia",
-                style: GoogleFonts.poppins(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+              SingleChildScrollView(
+                child: Text(
+                  "Layanana Belum Tersedia",
+                  style: GoogleFonts.poppins(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               // Text(
@@ -67,11 +71,13 @@ class _HomePageNewState extends State<HomePageNew> {
               //   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,),
               // ),
               SizedBox(height: 10),
-              Text(
-                "Fitur ini masih dalam tahap pengembangan. Nantikan update berikutnya!",
-                textAlign: TextAlign.center,
-                style: GoogleFonts.lato(
-                  fontSize: 14,color: Colors.grey,
+              SingleChildScrollView (
+                child: Text(
+                  "Fitur ini masih dalam tahap pengembangan. Nantikan update berikutnya!",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.lato(
+                    fontSize: 14,color: Colors.grey,
+                  ),
                 ),
               ),
               // Text(
@@ -80,13 +86,17 @@ class _HomePageNewState extends State<HomePageNew> {
               //   style: TextStyle(fontSize: 14, color: Colors.grey),
               // ),
               SizedBox(height: 20),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    shadowColor: Colors.orangeAccent,
-                    backgroundColor: Colors.blue[800]),
-                onPressed: () => Navigator.pop(context),
-                child: Text("Tutup", style: GoogleFonts.roboto(fontSize: 16, fontWeight: FontWeight.w600,color: Colors.white,),),
-              )
+              SingleChildScrollView (
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      shadowColor: Colors.orangeAccent,
+                      backgroundColor: Colors.blue[800]),
+                  onPressed: () => Navigator.pop(context),
+                  child: Text("Tutup", style: GoogleFonts.roboto(fontSize: 16, fontWeight: FontWeight.w600,color: Colors.white,),),
+                ),
+              ),
+
+              SizedBox(height: 20,),
             ],
           ),
         );
@@ -143,21 +153,21 @@ class _HomePageNewState extends State<HomePageNew> {
             child: SafeArea(
               child: Column(
                 children: [
-                  Text(
-                    "ESS MOBILE",
-                    style: GoogleFonts.roboto(
-                      fontSize: 45,
-                      fontWeight: FontWeight.bold,color: Colors.white,
-                    ),
-                  ),
                   // Text(
-                  //   'ESS MOBILE',
-                  //   style: kHeading6.copyWith(
-                  //     color: Colors.white,
-                  //     fontWeight: FontWeight.bold,
+                  //   "ESS MOBILE",
+                  //   style: GoogleFonts.roboto(
                   //     fontSize: 45,
+                  //     fontWeight: FontWeight.bold,color: Colors.white,
                   //   ),
                   // ),
+                  Text(
+                    'ESS MOBILE',
+                    style: kHeading6.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 45,
+                    ),
+                  ),
                   // SizedBox(
                   //   height: 30,
                   // ),

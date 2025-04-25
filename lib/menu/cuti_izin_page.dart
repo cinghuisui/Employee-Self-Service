@@ -1,5 +1,6 @@
 import 'package:ess_mobile/menu/pengajuan_cuti.dart';
-import 'package:ess_mobile/menu/riwayat_pengajuan_cuti.dart';
+import 'package:ess_mobile/menu/riwayat_pengajuan_cuit_new.dart';
+// import 'package:ess_mobile/menu/riwayat_pengajuan_cuti.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,6 +13,13 @@ class CutiIzin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        textSelectionTheme: const TextSelectionThemeData(
+          selectionColor: Colors.lightBlueAccent, // Warna biru saat teks diseleksi
+          cursorColor: Colors.blue,              // Warna kursor
+          selectionHandleColor: Colors.blue,     // Warna titik seleksi
+        ),
+      ),
       color: Colors.blue[800],
       debugShowCheckedModeBanner: false,
       home: CutiIzinPage(),
@@ -56,7 +64,8 @@ class _CutiIzinPageState extends State<CutiIzinPage> {
           SizedBox(height: 8),
           // Isi berdasarkan tab yang dipilih
           Expanded(
-            child: _selectedIndex == 0 ? PengajuanCuti() : CutiRiwayatPage(),
+            // child: _selectedIndex == 0 ? PengajuanCuti() : CutiRiwayatPage(),
+            child: _selectedIndex == 0 ? PengajuanCuti() : DataList(),
             // child: _selectedIndex == 0 ? _buildAllContent() : _buildUnansweredContent(),
           ),
         ],

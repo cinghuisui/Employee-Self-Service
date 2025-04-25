@@ -1,3 +1,4 @@
+import 'package:ess_mobile/menu/pdf_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -178,10 +179,30 @@ class PengajuanCutiScreen extends StatelessWidget {
                   //     );
                   // Aksi ketika tombol "Lihat Form" ditekan
                 },
-                child: Text(
-                  "Download Form",
-                  style: TextStyle(color: Colors.blue[800],),
-                ),
+               child:  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      side: const BorderSide(color: Colors.green),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => PdfPage()),
+                      );
+                      // Aksi ketika tombol "Lihat Form" ditekan
+                    },
+                    child: const Text(
+                      "Lihat Form",
+                      style: TextStyle(color: Colors.green),
+                    ),
+                  ),
+                // child: Text(
+                //   "Download Form",
+                //   style: TextStyle(color: Colors.blue[800],),
+                // ),
               ),
             ),
             ],

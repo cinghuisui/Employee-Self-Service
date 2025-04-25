@@ -45,7 +45,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
     {
       "icon": "rejected",
       "title": "Pengajuan Cuti Anda Ditolak",
-      "approver": "Junaidi",
+      "ditolak": "Junaidi",
       "role": "Manager Departement",
       "date": "10 Feb",
       "month": "Bulan Ini"
