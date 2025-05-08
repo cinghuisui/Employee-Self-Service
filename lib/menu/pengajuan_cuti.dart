@@ -59,6 +59,8 @@ class _PengajuanCutiState extends State<PengajuanCuti> {
   String? _errorNik;
   String? _errorKeteranganCuti;
   String? selectedDay;
+  String? selectedLeaveType;
+  bool isFocused = false;
 
   void _clearFields() {
     // Menghapus teks di semua TextEditingController
@@ -116,6 +118,21 @@ class _PengajuanCutiState extends State<PengajuanCuti> {
   //     },
   //   );
   // }
+
+  List<String> leaveTypes = [
+    "Cuti tahunan",
+    "Cuti Membastis Anak",
+    "Cuti Menikah",
+    "Cuti Menghitankan Anak",
+    "Cuti Pernikahan Anak",
+    "Cuti Ibadah Haji",
+    "Cuti Istri Melahirkan/Keguguran",
+    "Cuti Menikah",
+    "Cuti Menghitankan Anak",
+    "Cuti Pernikahan Anak",
+    "Cuti Ibadah Haji",
+    "Cuti Istri Melahirkan/Keguguran",
+  ];
 
   final List<String> days = [
     "Senin",
@@ -268,6 +285,38 @@ class _PengajuanCutiState extends State<PengajuanCuti> {
         _masukKerjaDate = tempDate;
       });
     }
+  }
+
+  void _showLeaveTypes() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.blue[800],
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (context) {
+        return Container(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          child: ListView.builder(
+            itemCount: leaveTypes.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(
+                  leaveTypes[index],
+                  style: TextStyle(color: Colors.white),
+                ),
+                onTap: () {
+                  setState(() {
+                    selectedLeaveType = leaveTypes[index];
+                  });
+                  Navigator.pop(context);
+                },
+              );
+            },
+          ),
+        );
+      },
+    );
   }
 
   bool _isLibur(DateTime date) {
@@ -463,11 +512,12 @@ class _PengajuanCutiState extends State<PengajuanCuti> {
                     // labelText: 'Departemen/Bagian',
                     hintText: '-Pilih Departemen-',
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black54,width: 1.5),
+                      borderSide: BorderSide(color: Colors.black54, width: 1.5),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue[800]!, width: 2),
+                      borderSide:
+                          BorderSide(color: Colors.blue[800]!, width: 2),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     border: OutlineInputBorder(
@@ -537,11 +587,12 @@ class _PengajuanCutiState extends State<PengajuanCuti> {
                   },
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black54,width: 1.5),
+                      borderSide: BorderSide(color: Colors.black54, width: 1.5),
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue[800]!, width: 2),
+                      borderSide:
+                          BorderSide(color: Colors.blue[800]!, width: 2),
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     border: OutlineInputBorder(
@@ -566,14 +617,15 @@ class _PengajuanCutiState extends State<PengajuanCuti> {
                         TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 8),
                 DropdownButtonFormField<String>(
-                  decoration:  InputDecoration(
+                  decoration: InputDecoration(
                     hintText: '-Pilih Hari-',
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black54,width: 1.5),
+                      borderSide: BorderSide(color: Colors.black54, width: 1.5),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue[800]!, width: 2),
+                      borderSide:
+                          BorderSide(color: Colors.blue[800]!, width: 2),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     // border: OutlineInputBorder(
@@ -626,11 +678,12 @@ class _PengajuanCutiState extends State<PengajuanCuti> {
                   },
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black54,width: 1.5),
+                      borderSide: BorderSide(color: Colors.black54, width: 1.5),
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue[800]!, width: 2),
+                      borderSide:
+                          BorderSide(color: Colors.blue[800]!, width: 2),
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     // border: OutlineInputBorder(
@@ -647,6 +700,40 @@ class _PengajuanCutiState extends State<PengajuanCuti> {
                     }
                     return null;
                   },
+                ),
+                SizedBox(height: 20),
+                Text(
+                  'Jenis Cuti',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 8),
+                GestureDetector(
+                  onTap: _showLeaveTypes,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                    decoration: BoxDecoration(
+                  //     border: Border.all(
+                  //   color: isFocused ? Colors.blue : Colors.black54,width: 2,
+                  // ),
+                      border: Border.all(color: isFocused ? Colors.blue[800]! : Colors.black54, width: 1.5),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          selectedLeaveType ?? "-Pilih Cuti-",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: (16),
+                            // fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Icon(Icons.arrow_drop_down, color: Colors.black54,),
+                      ],
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 16),
                 // Cuti Pada Tanggal

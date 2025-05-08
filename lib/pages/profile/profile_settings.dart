@@ -2,6 +2,13 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(MaterialApp(
+    theme: ThemeData(
+        textSelectionTheme: const TextSelectionThemeData(
+          selectionColor: Colors.lightBlueAccent, // Warna biru saat teks diseleksi
+          cursorColor: Colors.blue,              // Warna kursor
+          selectionHandleColor: Colors.blue,     // Warna titik seleksi
+        ),
+      ),
     debugShowCheckedModeBanner: false,
     home: ProfileSettings(),
   ));

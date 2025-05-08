@@ -1,5 +1,6 @@
 import 'package:ess_mobile/buttomnavbar/buttom_nav_bar.dart';
 import 'package:ess_mobile/pages/profile/change_password.dart';
+import 'package:ess_mobile/pages/profile/personal_info.dart';
 import 'package:ess_mobile/pages/profile/profile_settings.dart';
 // import 'package:ess_mobile/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
@@ -94,7 +95,7 @@ class ProfilePage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ProfileSettings()),
+                          builder: (context) => PersonalInfo()),
                     );
                   },
                 ),

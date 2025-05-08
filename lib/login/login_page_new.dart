@@ -37,6 +37,7 @@ class _LoginPage1State extends State<LoginPage1> {
   bool _isPasswordVisible = false;
   bool _isUsernameFocused = false;
   bool _isPasswordFocused = false;
+  bool _isLoading = false;
   // bool isLoading = false;
   // bool _showUsernameError = false;
 
@@ -45,10 +46,18 @@ class _LoginPage1State extends State<LoginPage1> {
 
   Future<void> _login() async {
     // isLoading = true;
+     setState(() {
+      _isLoading = true;
+    });
     final prefs = await SharedPreferences.getInstance();
     bool isFirstLogin = prefs.getBool('first_login') ?? true;
     // _showUsernameError = _usernameController.text.isEmpty;
     // Simulasi login (username: admin, password: 1234)
+      await Future.delayed(const Duration(seconds: 2));
+
+    setState(() {
+      _isLoading = false;
+    });
     if (_usernameController.text == "23455" &&
         _passwordController.text == "1234") {
       // isLoading = false;
@@ -220,25 +229,48 @@ class _LoginPage1State extends State<LoginPage1> {
                 SizedBox(height: 50),
                 // isLoading
                 //     ? CircularProgressIndicator()
-                    SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: _login,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue[800],
-                            padding: EdgeInsets.symmetric(vertical: 15),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0)),
-                          ),
-                          child: Text(
+                // SizedBox(
+                //     width: double.infinity,
+                //     child: ElevatedButton(
+                //       onPressed: _login,
+
+                //       style: ElevatedButton.styleFrom(
+                //         backgroundColor: Colors.blue[800],
+                //         padding: EdgeInsets.symmetric(vertical: 15),
+                //         shape: RoundedRectangleBorder(
+                //             borderRadius: BorderRadius.circular(8.0)),
+                //       ),
+                //       child: Text(
+                //         'Login',
+                //         style: TextStyle(
+                //           fontSize: 16,
+                //           color: Colors.white,
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: _isLoading ? null : _login,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue[800],
+                      padding: EdgeInsets.symmetric(vertical: 15),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0)),
+                    ),
+                    child: _isLoading
+                        ? CircularProgressIndicator(color: Colors.blue[800])
+                        : Text(
                             'Login',
                             style: TextStyle(
                               fontSize: 16,
                               color: Colors.white,
                             ),
                           ),
-                        ),
-                      ),
+                  ),
+                ),
                 // const SizedBox(height: 20),
                 // ElevatedButton(
                 //   onPressed: _login,
@@ -263,13 +295,22 @@ class ChangePasswordScreen extends StatefulWidget {
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   bool _isPasswordFocused = false;
   bool _isPasswordVisible = false;
-  bool isLoading = false;
+  // bool isLoading = false;
+  bool _isLoading = false;
   // bool _isUsernameFocused = false;
   // final TextEditingController _newPasswordController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   Future<void> _changePassword() async {
+      setState(() {
+      _isLoading = true;
+    });
     final prefs = await SharedPreferences.getInstance();
+        await Future.delayed(const Duration(seconds: 2));
+
+    setState(() {
+      _isLoading = false;
+    });
     await prefs.setBool(
         'first_login', false); // Set status login pertama selesai
     Navigator.pushReplacement(
@@ -378,22 +419,42 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             SizedBox(
               height: 20,
             ),
-            isLoading
-                ? CircularProgressIndicator()
-                : ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            Colors.blue[800] // Warna biru untuk tombol
-                        ),
-                    onPressed: _changePassword,
-                    child: const Text(
-                      "Simpan Password",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+            // isLoading
+            //     ? CircularProgressIndicator()
+            //     : ElevatedButton(
+            //         style: ElevatedButton.styleFrom(
+            //             backgroundColor:
+            //                 Colors.blue[800] // Warna biru untuk tombol
+            //             ),
+            //         onPressed: _changePassword,
+            //         child: const Text(
+            //           "Simpan Password",
+            //           style: TextStyle(
+            //             fontWeight: FontWeight.bold,
+            //             color: Colors.white,
+            //           ),
+            //         ),
+            //       ),
+
+            SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: _isLoading ? null : _changePassword,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue[800],
+                    padding: EdgeInsets.symmetric(vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
+                  child: _isLoading
+                      ? CircularProgressIndicator(color: Colors.white)
+                      : Text(
+                          "Simpan Password",
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        ),
+                ),
+              ),
           ],
         ),
       ),

@@ -35,6 +35,7 @@ class _PolicyAgreementScreenState extends State<PolicyAgreementScreen> {
   final ScrollController _scrollController = ScrollController();
   bool _isChecked = false;
   bool _hasScrolledToEnd = false;
+  bool _isLoading = false;
 
   @override
   void initState() {
@@ -50,6 +51,14 @@ class _PolicyAgreementScreenState extends State<PolicyAgreementScreen> {
   }
 
   Future<void> _acceptPolicy() async {
+    setState(() {
+      _isLoading = true;
+    });
+    await Future.delayed(const Duration(seconds: 2));
+
+    setState(() {
+      _isLoading = false;
+    });
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('hasAcceptedPolicy', true);
     Navigator.pushReplacement(
@@ -103,11 +112,12 @@ class _PolicyAgreementScreenState extends State<PolicyAgreementScreen> {
                                   "Adanya Kebijakan Privasi ini adalah komitmen dari Perusahaan untuk menghargai dan melindungi setiap data atau informasi pribadi Pengguna Platform "),
                           TextSpan(
                             text: "(domain website), ",
-                            style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-                          ), 
+                            style: TextStyle(
+                                color: Colors.red, fontWeight: FontWeight.bold),
+                          ),
                           TextSpan(
                               text:
-                                  "(Platform-Platform turunannya, serta Aplikasi Mandiri Tenaga Kerja (selanjutnya disebut sebagai ('Platform'). Kebijakan Privasi ini (beserta syarat-syarat penggunaan dari Platform Aplikasi Mandiri Tenaga Kerja sebagaimana tercantum dalam Syarat & Ketentuan dan informasi lain yang tercantum di Platform) menetapkan dasar atas perolehan, pengumpulan, pengolahan, penganalisisan, penampilan, pengiriman, pembukaan, penyimpanan, perubahan, penghapusan dan/atau segala bentuk pengelolaan yang terkait dengan data atau informasi yang mengidentifikasikan atau dapat digunakan untuk mengidentifikasi Pengguna yang Pengguna berikan kepada Perusahaan atau yang Perusahaan kumpulkan dari Pengguna maupun pihak lainnya (selanjutnya disebut sebagai 'Data Pribadi'). Dengan mengklik “Login” (masuk) atau pernyataan serupa yang tersedia di laman login Platform, Pengguna menyatakan bahwa setiap Data Pribadi Pengguna merupakan data yang benar dan sah, Pengguna mengakui bahwa ia telah diberitahukan dan memahami ketentuan Kebijakan Privasi ini serta Pengguna memberikan persetujuan kepada Perusahaan untuk memperoleh, mengumpulkan, mengolah, menganalisis, menampilkan, mengirimkan, membuka, menyimpan, mengubah, menghapus, mengelola dan/atau mempergunakan data tersebut untuk tujuan sebagaimana tercantum dalam Kebijakan Privasi. \n\n"),                                 
+                                  "(Platform-Platform turunannya, serta Aplikasi Mandiri Tenaga Kerja (selanjutnya disebut sebagai ('Platform'). Kebijakan Privasi ini (beserta syarat-syarat penggunaan dari Platform Aplikasi Mandiri Tenaga Kerja sebagaimana tercantum dalam Syarat & Ketentuan dan informasi lain yang tercantum di Platform) menetapkan dasar atas perolehan, pengumpulan, pengolahan, penganalisisan, penampilan, pengiriman, pembukaan, penyimpanan, perubahan, penghapusan dan/atau segala bentuk pengelolaan yang terkait dengan data atau informasi yang mengidentifikasikan atau dapat digunakan untuk mengidentifikasi Pengguna yang Pengguna berikan kepada Perusahaan atau yang Perusahaan kumpulkan dari Pengguna maupun pihak lainnya (selanjutnya disebut sebagai 'Data Pribadi'). Dengan mengklik “Login” (masuk) atau pernyataan serupa yang tersedia di laman login Platform, Pengguna menyatakan bahwa setiap Data Pribadi Pengguna merupakan data yang benar dan sah, Pengguna mengakui bahwa ia telah diberitahukan dan memahami ketentuan Kebijakan Privasi ini serta Pengguna memberikan persetujuan kepada Perusahaan untuk memperoleh, mengumpulkan, mengolah, menganalisis, menampilkan, mengirimkan, membuka, menyimpan, mengubah, menghapus, mengelola dan/atau mempergunakan data tersebut untuk tujuan sebagaimana tercantum dalam Kebijakan Privasi. \n\n"),
                           TextSpan(
                             text:
                                 "A.	Perolehan dan Pengumpulan Data Pribadi Pengguna \n\n",
@@ -211,20 +221,42 @@ class _PolicyAgreementScreenState extends State<PolicyAgreementScreen> {
               ],
             ),
             SizedBox(height: 12),
+            // SizedBox(
+            //   width: double.infinity,
+            //   child: ElevatedButton(
+            //     style: ElevatedButton.styleFrom(
+            //       backgroundColor: Colors.blue[800] // Warna biru untuk tombol
+            //     ),
+            //     onPressed: _isChecked
+            //         ? _acceptPolicy
+            //         : null, // Disable tombol jika belum dicentang
+            //     child: Text(
+            //       "Lanjut ke Login",
+            //       style: TextStyle(
+            //           fontWeight: FontWeight.bold, color: Colors.white),
+            //     ),
+            //   ),
+            // ),
+
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue[800] // Warna biru untuk tombol
-                ),
                 onPressed: _isChecked
                     ? _acceptPolicy
                     : null, // Disable tombol jika belum dicentang
-                child: Text(
-                  "Lanjut ke Login",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue[800],
+                  padding: EdgeInsets.symmetric(vertical: 15),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
                 ),
+                child: _isLoading
+                    ? CircularProgressIndicator(color: Colors.white)
+                    : Text(
+                        "Lanjut ke Login",
+                        style: TextStyle(fontSize: 16, color: Colors.white),
+                      ),
               ),
             ),
           ],
